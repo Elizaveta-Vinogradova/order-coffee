@@ -1,4 +1,4 @@
-let count = 2;
+let count = 1;
 
 const overlay = document.getElementById("overlay");
 const popup = document.getElementById("popup");
@@ -7,9 +7,9 @@ const container = document.querySelector("#container");
 const deleteBtn = document.querySelector('.krest');
 
 btn.addEventListener("click", () => {
+    count++;
     const newForm = createForm(count);
     container.appendChild(newForm);
-    count++;
 })
 
 function createForm (count) {
@@ -88,11 +88,32 @@ function addDeleteHandler(deleteBtn) {
 const readyBtn = document.querySelector(".submit-button");
 readyBtn.addEventListener("click", (event) => {
         event.preventDefault()
+        const ready = document.querySelector("#popup");
+        ready.innerHTML = `
+            <div class="krest-div">
+                <button class="krest-modal" id="krestik">❌</button>
+                <h2>Вы заказали ${count} ${sklonenieSlov(count)}</h2>
+            </div>
+        `;
+        const closeBtn = document.querySelector(".krest-modal");
+        closeBtn.addEventListener("click", (e) => {
+            e.preventDefault()
+            popup.style.display = "none";
+            overlay.classList.remove("show");});
         popup.style.display = "block";
         overlay.classList.add("show");});
 
-const closeBtn = document.querySelector(".krest-modal");
-closeBtn.addEventListener("click", (e) => {
-    e.preventDefault()
-    popup.style.display = "none";
-    overlay.classList.remove("show");});
+
+function sklonenieSlov(count) {
+    if (count % 10 === 1 && count % 100 !== 11) {
+        return "напиток";
+    } else if (
+        count % 10 >= 2 &&
+        count % 10 <= 4 &&
+        (count % 100 < 10 || count % 100 >= 20)
+    ) {
+        return "напитка";
+    } else {
+        return "напитков";
+    }
+}
