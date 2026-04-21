@@ -57,6 +57,14 @@
     border: none;
     outline: none;
 }
+
+.krest-modal {
+    margin-left: auto;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
 .popup {
     position: fixed;
     top: 50%;

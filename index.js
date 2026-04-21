@@ -6,8 +6,6 @@ const btn = document.querySelector(".add-button");
 const container = document.querySelector("#container");
 const deleteBtn = document.querySelector('.krest');
 
-
-
 btn.addEventListener("click", () => {
     const newForm = createForm(count);
     container.appendChild(newForm);
@@ -85,16 +83,16 @@ function addDeleteHandler(deleteBtn) {
         deletee.remove();
         count--;
     });
-
-function bindSubmit(){
-    const readyBtn = document.querySelectorAll(".form");
-    readyBtn.forEach(btn => {
-        btn.addEventListener("submit", () =>{
-            popup.style.display = "block";
-            overlay.classList.add("show");
-            }
-        );
-    })
 }
 
-bindSubmit();
+const readyBtn = document.querySelector(".submit-button");
+readyBtn.addEventListener("click", (event) => {
+        event.preventDefault()
+        popup.style.display = "block";
+        overlay.classList.add("show");});
+
+const closeBtn = document.querySelector(".krest-modal");
+closeBtn.addEventListener("click", (e) => {
+    e.preventDefault()
+    popup.style.display = "none";
+    overlay.classList.remove("show");});
