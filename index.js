@@ -3,12 +3,23 @@ let count = 2;
 
 const btn = document.querySelector(".add-button");
 const container = document.querySelector("#container");
+const deleteBtn = document.querySelector('.krest');
+
 
 btn.addEventListener("click", () => {
-        container.innerHTML+= `
-        <form>
-            <fieldset class="beverage">
-        <h4 class="beverage-count">Напиток №${count}</h4>
+    const newForm = createForm(count);
+    container.appendChild(newForm);
+    count++;
+})
+
+function createForm (count) {
+    const form = document.createElement("form");
+        form.innerHTML = `
+        <fieldset class="beverage">
+        <div class="krest-div">
+          <h4 class="beverage-count">Напиток №${count}</h4>
+          <button class="krest">❌</button>
+        </div>
         <label class="field">
           <span class="label-text">Я буду</span>
           <select>
@@ -56,7 +67,21 @@ btn.addEventListener("click", () => {
           </label>
         </div>
       </fieldset>
-      </form>
             `;
-        count++;
+        const newDeleteBtn = form.querySelector('.krest');
+        addDeleteHandler(newDeleteBtn);
+        return form;
+}
+
+function addDeleteHandler(deleteBtn) {
+    deleteBtn.addEventListener("click", (e) => {
+        const forms = document.querySelectorAll("form");
+        if (forms.length === 1) {
+            return;
+        }
+        const deletee = e.target.closest("form");
+        deletee.remove();
+        count--;
     });
+}
+

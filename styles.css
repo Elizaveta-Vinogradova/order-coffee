@@ -2,6 +2,7 @@
     border: 1px solid #eee;
     margin: 15px 0;
     padding: 15px;
+    width: 200px;
 }
 
 .beverage-count {
@@ -45,3 +46,14 @@
     border-radius: 5px;
 }
 
+.krest-div {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.krest {
+    margin-left: auto;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
