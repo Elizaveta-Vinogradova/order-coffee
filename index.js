@@ -1,8 +1,10 @@
 let count = 2;
 
-
+const overlay = document.getElementById("overlay");
+const popup = document.getElementById("popup");
 const btn = document.querySelector(".add-button");
 const container = document.querySelector("#container");
+
 
 btn.addEventListener("click", () => {
         container.innerHTML+= `
@@ -59,4 +61,18 @@ btn.addEventListener("click", () => {
       </form>
             `;
         count++;
+        bindSubmit();
     });
+
+function bindSubmit(){
+    const readyBtn = document.querySelectorAll(".form");
+    readyBtn.forEach(btn => {
+        btn.addEventListener("submit", () =>{
+            popup.style.display = "block";
+            overlay.classList.add("show");
+            }
+        );
+    })
+}
+
+bindSubmit();
