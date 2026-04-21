@@ -93,6 +93,7 @@ readyBtn.addEventListener("click", (event) => {
             <div class="krest-div">
                 <button class="krest-modal" id="krestik">❌</button>
                 <h2>Вы заказали ${count} ${sklonenieSlov(count)}</h2>
+                ${buildTables()}
             </div>
         `;
         const closeBtn = document.querySelector(".krest-modal");
@@ -116,4 +117,47 @@ function sklonenieSlov(count) {
     } else {
         return "напитков";
     }
+}
+
+function buildTables() {
+    const drinks = getAllDrinks();
+    let result = `
+       <table>
+        <tr>
+            <th> Напиток </th>
+            <th> Молоко </th>
+            <th> Дополнительно </th>
+        </tr>    
+    `;
+    drinks.forEach(drink => {
+        const row =
+            `
+            <tr>
+                <td> ${drink.select}</td>
+                <td> ${drink.milk ? drink.milk : ''}</td>
+                <td> ${drink.options ? drink.options.join(',') : ''}</td>
+            </tr>    
+            `;
+        result += row;
+    })
+    result += "</table>";
+    return result;
+}
+
+function getAllDrinks(){
+    const forms = document.querySelectorAll("form");
+    const result = [];
+    forms.forEach((form) => {
+        const drink = {};
+        const select = form.querySelector("select").value;
+
+        drink.select = select;
+        const milk = form.querySelector('input[type="radio"]:checked');
+        drink.milk = milk ? milk.value : null;
+
+        const options = form.querySelectorAll('input[type="checkbox"]:checked');
+        drink.options = Array.from(options).map(opt => opt.value);
+        result.push(drink);
+    })
+    return result;
 }
