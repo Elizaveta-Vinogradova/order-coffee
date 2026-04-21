@@ -1,9 +1,11 @@
 let count = 2;
 
-
+const overlay = document.getElementById("overlay");
+const popup = document.getElementById("popup");
 const btn = document.querySelector(".add-button");
 const container = document.querySelector("#container");
 const deleteBtn = document.querySelector('.krest');
+
 
 
 btn.addEventListener("click", () => {
@@ -83,5 +85,16 @@ function addDeleteHandler(deleteBtn) {
         deletee.remove();
         count--;
     });
+
+function bindSubmit(){
+    const readyBtn = document.querySelectorAll(".form");
+    readyBtn.forEach(btn => {
+        btn.addEventListener("submit", () =>{
+            popup.style.display = "block";
+            overlay.classList.add("show");
+            }
+        );
+    })
 }
 
+bindSubmit();
